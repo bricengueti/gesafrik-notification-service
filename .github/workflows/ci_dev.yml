@@ -55,7 +55,7 @@ jobs:
           
           # Si aucun nom d'image n'est trouvé, utiliser une valeur par défaut
           if [ -z "$IMAGE_NAME" ]; then
-            IMAGE_NAME="brice99/gesafrikauthservice:dev"
+            IMAGE_NAME="brice99/gesafriknotification:dev"
           fi
           
           # Enregistrer le nom de l'image pour les étapes suivantes
