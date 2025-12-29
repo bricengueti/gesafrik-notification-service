@@ -55,7 +55,7 @@ jobs:
           
           # Si aucun nom d'image n'est trouvé, utiliser une valeur par défaut
           if [ -z "$IMAGE_NAME" ]; then
-            IMAGE_NAME="brice99/gesafrikNotificationService:dev"
+            IMAGE_NAME="brice99/gesafriknotificationservice:dev"
           fi
           
           # Enregistrer le nom de l'image pour les étapes suivantes
@@ -65,8 +65,8 @@ jobs:
       - name: Push image to Docker Hub
         run: |
           # Tag and push the image
-          docker tag $IMAGE_NAME ${{ secrets.DOCKERHUB_USERNAME }}/gesafrikNotificationService:dev
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/gesafrikNotificationService:dev
+          docker tag $IMAGE_NAME ${{ secrets.DOCKERHUB_USERNAME }}/gesafriknotificationservice:dev
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/gesafriknotificationservice:dev
           
           
 
@@ -103,7 +103,7 @@ jobs:
 
             cd /gesafrik/gesafriknotification
 
-            docker pull brice99/gesafrikNotificationService:dev
+            docker pull brice99/gesafriknotificationservice:dev
             
             
             docker compose --env-file .env_dev -p gesafrik-dev up -d
