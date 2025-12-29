@@ -12,6 +12,11 @@ public class NotificationConsumer {
 
     private static final Logger log = LoggerFactory.getLogger(NotificationConsumer.class);
 
+    private final EmailService emailService;
+
+    public NotificationConsumer(EmailService emailService) {
+        this.emailService = emailService;
+    }
     @KafkaListener(
             topics = "${app.kafka.topics.notification:gesafrik-notifications}",
             groupId = "${spring.kafka.consumer.group-id:gesafrik-notification-group}"
@@ -35,8 +40,8 @@ public class NotificationConsumer {
             groupId = "${spring.kafka.consumer.group-id:gesafrik-notification-group}"
     )
     public void consumeEmailNotification(@Payload NotificationMessage notification) {
-        log.info("Processing EMAIL notification: ID={}", notification.id());
-        processEmail(notification);
+        log.info("Processing consumer EMAIL notification: ID={}, Recipient={}", notification.id(), notification.recipient());
+        emailService.sendEmail(notification);
     }
 
     @KafkaListener(

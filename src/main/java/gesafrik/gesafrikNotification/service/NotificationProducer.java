@@ -102,4 +102,37 @@ public class NotificationProducer {
         NotificationMessage notification = NotificationMessage.createPush(recipient, title, body);
         sendNotification(notification);
     }
+
+
+    // Dans NotificationProducer.java
+    public void producerEmailNotification(NotificationMessage notification) {
+        try {
+            // Forcer le type à EMAIL si ce n’est pas déjà le cas
+            NotificationMessage emailNotification = notification.isEmail()
+                    ? notification
+                    : NotificationMessage.createEmail(notification.recipient(), notification.subject(), notification.content());
+
+            kafkaTemplate.send(emailTopic, emailNotification.id(), emailNotification)
+                    .whenComplete((result, ex) -> {
+                        if (ex == null) {
+                            log.info("Email notification sent producer successfully: ID={}, Recipient={}, Partition={}, Offset={}",
+                                    emailNotification.id(),
+                                    emailNotification.recipient(),
+                                    result.getRecordMetadata().partition(),
+                                    result.getRecordMetadata().offset());
+                        } else {
+                            log.error("Failed to send email notification: ID={}, Recipient={}, Error={}",
+                                    emailNotification.id(),
+                                    emailNotification.recipient(),
+                                    ex.getMessage(), ex);
+                            // TODO: retry logic or dead-letter topic
+                        }
+                    });
+
+        } catch (Exception e) {
+            log.error("Error while producing email notification: {}", e.getMessage(), e);
+            throw e; // pour que le contrôleur capture l’exception
+        }
+    }
+
 }

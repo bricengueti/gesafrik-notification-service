@@ -2,6 +2,7 @@ package gesafrik.gesafrikNotification.controller;
 
 
 import gesafrik.gesafrikNotification.DTO.NotificationMessage;
+import gesafrik.gesafrikNotification.service.NotificationConsumer;
 import gesafrik.gesafrikNotification.service.NotificationProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,13 +13,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/notifications")
+@RequestMapping("/")
 public class NotificationController {
 
     private static final Logger log = LoggerFactory.getLogger(NotificationController.class);
 
     @Autowired
     private NotificationProducer notificationProducer;
+
+    @Autowired
+    private NotificationConsumer notificationConsumer;
 
     /**
      * Send a generic notification
@@ -50,30 +54,43 @@ public class NotificationController {
     /**
      * Send email notification
      */
-    @PostMapping("/email")
-    public ResponseEntity<Map<String, Object>> sendEmail(
-            @RequestParam String recipient,
-            @RequestParam String subject,
-            @RequestParam String content,
-            @RequestParam(required = false) Map<String, Object> metadata) {
-
+    @PostMapping("/email/producer")
+    public ResponseEntity<Map<String, Object>> sendEmail(@RequestBody NotificationMessage notification) {
         try {
-            log.info("Received email notification request: Recipient={}, Subject={}", recipient, subject);
+            log.info("Received email notification request: Recipient={}, Subject={}",
+                    notification.recipient(), notification.subject());
 
-            NotificationMessage notification;
-            if (metadata != null && !metadata.isEmpty()) {
-                notification =  NotificationMessage.createEmail( recipient, subject, content);
-            } else {
-                notification = NotificationMessage.createEmail(recipient, subject, content);
-            }
-
-            notificationProducer.sendNotification(notification);
+            notificationProducer.producerEmailNotification(notification);
 
             return ResponseEntity.ok(Map.of(
                     "status", "success",
                     "message", "Email notification sent successfully",
                     "notificationId", notification.id(),
-                    "recipient", recipient
+                    "recipient", notification.recipient()
+            ));
+        } catch (Exception e) {
+            log.error("Error sending email notification: {}", e.getMessage(), e);
+            return ResponseEntity.internalServerError()
+                    .body(Map.of(
+                            "status", "error",
+                            "message", "Error sending email notification: " + e.getMessage()
+                    ));
+        }
+    }
+
+    @PostMapping("/email/consumer")
+    public ResponseEntity<Map<String, Object>> sendEmailConsumer(@RequestBody NotificationMessage notification) {
+        try {
+            log.info("send email notification request: Recipient={}, Subject={}",
+                    notification.recipient(), notification.subject());
+
+            notificationConsumer.consumeEmailNotification(notification);
+
+            return ResponseEntity.ok(Map.of(
+                    "status", "success",
+                    "message", "Email notification sent successfully",
+                    "notificationId", notification.id(),
+                    "recipient", notification.recipient()
             ));
         } catch (Exception e) {
             log.error("Error sending email notification: {}", e.getMessage(), e);
