@@ -1,61 +1,500 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Bienvenue sur Gesafrik</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenue sur GESAFRIC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-          font-family: Arial, sans-serif;
-          color: #333;
-          line-height: 1.6;
-          background-color: #f9f9f9;
-          padding: 20px;
+            font-family: 'Ubuntu Sans', 'Urbanist', 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #0F766E 0%, #00cc99 100%);
+            padding: 40px 20px;
+            margin: 0;
+            min-height: 100vh;
         }
-        .container {
-          max-width: 600px;
-          margin: auto;
-          background: #fff;
-          border-radius: 8px;
-          padding: 30px;
-          border: 1px solid #eee;
+
+        .email-wrapper {
+            max-width: 650px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(15, 118, 110, 0.3);
         }
+
+        /* Header avec dégradé */
         .header {
-          text-align: center;
-          color: #0066cc;
+            background: linear-gradient(135deg, #0F766E 0%, #00cc99 100%);
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
         }
-        .button {
-          display: inline-block;
-          padding: 12px 20px;
-          margin-top: 20px;
-          background-color: #0066cc;
-          color: #fff;
-          text-decoration: none;
-          border-radius: 6px;
-          font-weight: bold;
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
         }
+
+        .logo-container {
+            position: relative;
+            z-index: 2;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo-letter {
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo-red {
+            color: #B81223;
+        }
+
+        .logo-teal {
+            color: #0F766E;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            margin: 15px 0 0 0;
+            position: relative;
+            z-index: 2;
+            letter-spacing: 0.5px;
+        }
+
+        /* Contenu principal */
+        .content {
+            padding: 40px 30px;
+            background: #fdfdfd;
+        }
+
+        .welcome-message {
+            background: linear-gradient(135deg, rgba(15, 118, 110, 0.08) 0%, rgba(0, 204, 153, 0.08) 100%);
+            border-left: 4px solid #0F766E;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .welcome-message h2 {
+            color: #0F766E;
+            font-size: 24px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .welcome-message p {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Carte d'information */
+        .info-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 2px 8px rgba(15, 118, 110, 0.08);
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #6c757d;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-value {
+            color: #212529;
+            font-size: 18px;
+            font-weight: bold;
+            background: linear-gradient(135deg, rgba(15, 118, 110, 0.1) 0%, rgba(0, 204, 153, 0.1) 100%);
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 2px dashed #0F766E;
+        }
+
+        /* Instructions */
+        .instructions {
+            margin: 30px 0;
+        }
+
+        .instructions h3 {
+            color: #343a40;
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        .step-list {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+
+        .step-list li {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 45px;
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: linear-gradient(135deg, #0F766E 0%, #00cc99 100%);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* Bouton CTA */
+        .cta-container {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #0F766E 0%, #00cc99 100%);
+            color: white;
+            text-decoration: none;
+            padding: 16px 50px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(15, 118, 110, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(15, 118, 110, 0.4);
+        }
+
+        /* Note de sécurité */
+        .security-note {
+            background: #fff9e6;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+
+        .security-note strong {
+            color: #856404;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 15px;
+        }
+
+        .security-note p {
+            color: #856404;
+            font-size: 14px;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Badge de succès */
+        .success-badge {
+            display: inline-block;
+            background: #086705;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        /* Footer */
         .footer {
-          margin-top: 30px;
-          font-size: 12px;
-          color: #777;
-          text-align: center;
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .footer-title {
+            color: #0F766E;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .footer-description {
+            color: #6c757d;
+            font-size: 14px;
+            line-height: 1.6;
+            max-width: 500px;
+            margin: 0 auto 20px;
+        }
+
+        .footer-links {
+            margin: 20px 0;
+        }
+
+        .footer-links a {
+            color: #0F766E;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .footer-links a:hover {
+            color: #00cc99;
+            text-decoration: underline;
+        }
+
+        .footer-copyright {
+            color: #999;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+
+        /* Support info */
+        .support-box {
+            background: linear-gradient(135deg, rgba(15, 118, 110, 0.05) 0%, rgba(0, 204, 153, 0.05) 100%);
+            border: 1px solid rgba(15, 118, 110, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .support-box p {
+            color: #555;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .support-box a {
+            color: #0F766E;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .support-box a:hover {
+            color: #00cc99;
+        }
+
+        /* Responsive */
+        @media only screen and (max-width: 600px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .logo-letter {
+                font-size: 24px;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .info-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .info-value {
+                font-size: 16px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .cta-button {
+                padding: 14px 40px;
+                font-size: 16px;
+                display: block;
+                width: 100%;
+            }
+
+            .footer {
+                padding: 20px 15px;
+            }
+
+            .footer-links a {
+                display: block;
+                margin: 10px 0;
+            }
+
+            .success-badge {
+                display: block;
+                margin: 10px 0 0 0;
+            }
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <h2 class="header">Bienvenue sur Gesafrik 🎉</h2>
-    <p>
-        Félicitations ! La société <strong>{{societyName}}</strong> a été enregistrée avec succès.<br>
-        Son code d’identification unique est : <strong>{{societyCode}}</strong>.
-    </p>
-    <p>
-        Un compte administrateur au nom de {{userName}} a été créé pour vous. Cliquez sur le bouton ci-dessous pour  accéder à votre première connexion.
-    </p>
-    <a href="{{frontendLink}}" class="button">
-        login
-    </a>
+<div class="email-wrapper">
+    <!-- Header -->
+    <div class="header">
+        <div class="logo-container">
+            <div class="logo">
+                <span class="logo-letter logo-red">G</span>
+                <span class="logo-letter logo-red">E</span>
+                <span class="logo-letter logo-red">S</span>
+                <span class="logo-letter logo-teal">A</span>
+                <span class="logo-letter logo-teal">F</span>
+                <span class="logo-letter logo-teal">R</span>
+                <span class="logo-letter logo-teal">I</span>
+                <span class="logo-letter logo-teal">C</span>
+            </div>
+        </div>
+        <h1>Votre ERP de comptabilité</h1>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="content">
+        <!-- Message de bienvenue -->
+        <div class="welcome-message">
+            <h2>
+                <i class="fas fa-party-horn"></i> Bienvenue sur GESAFRIC !
+                <span class="success-badge"><i class="fas fa-check"></i> COMPTE CRÉÉ</span>
+            </h2>
+            <p>
+                Félicitations <strong>{{userName}}</strong> ! Votre entreprise a été enregistrée avec succès sur notre plateforme.
+                Vous êtes maintenant prêt à gérer votre comptabilité de manière simple et efficace.
+            </p>
+        </div>
+
+        <!-- Carte d'informations -->
+        <div class="info-card">
+            <div class="info-row">
+                <span class="info-label">Nom de la société</span>
+                <span class="info-value">{{societyName}}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Code d'identification</span>
+                <span class="info-value">{{societyCode}}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Administrateur</span>
+                <span class="info-value">{{userName}}</span>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="instructions">
+            <h3><i class="fas fa-clipboard-list"></i> Prochaines étapes</h3>
+            <ul class="step-list">
+                <li>Connectez-vous à votre espace administrateur en cliquant sur le bouton ci-dessous</li>
+                <li>Complétez la configuration de votre entreprise dans les paramètres</li>
+                <li>Invitez vos collaborateurs à rejoindre la plateforme</li>
+                <li>Commencez à gérer votre comptabilité efficacement</li>
+            </ul>
+        </div>
+
+        <!-- Bouton CTA -->
+        <div class="cta-container">
+            <a href="{{frontendLink}}" class="cta-button">
+                <i class="fas fa-lock"></i> Accéder à mon compte
+            </a>
+        </div>
+
+        <!-- Note de sécurité -->
+        <div class="security-note">
+            <strong><i class="fas fa-shield-alt"></i> Note de sécurité importante</strong>
+            <p>
+                Conservez précieusement votre code d'identification <strong>{{societyCode}}</strong>.
+                Vous en aurez besoin pour certaines opérations administratives.
+                Pour des raisons de sécurité, nous vous recommandons de modifier votre mot de passe lors de votre première connexion.
+            </p>
+        </div>
+
+        <!-- Support -->
+        <div class="support-box">
+            <p>
+                <i class="fas fa-headset"></i> Besoin d'aide ? Notre équipe support est à votre disposition.<br>
+                Contactez-nous à <a href="mailto:support@gesafric.com"><i class="fas fa-envelope"></i> support@gesafric.com</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <div class="footer">
-        Merci d’avoir choisi Gesafrik, votre ERP d’excellence.
+        <div class="footer-title">QU'EST-CE QUE GESAFRIC ?</div>
+        <p class="footer-description">
+            Un ERP de comptabilité est un logiciel de gestion intégré qui permet de centraliser,
+            automatiser et suivre en temps réel l'ensemble des opérations comptables d'une entreprise.
+            Il facilite la saisie des écritures, la gestion des journaux, la production des états financiers
+            et assure la conformité avec les obligations fiscales.
+        </p>
+
+        <div class="footer-links">
+            <a href="#">Centre d'aide</a>
+            <a href="#">Documentation</a>
+            <a href="#">Nous contacter</a>
+            <a href="#">Conditions d'utilisation</a>
+        </div>
+
+        <p class="footer-copyright">
+            © 2026 GESAFRIC - Tous droits réservés<br>
+            Cet email a été envoyé automatiquement, merci de ne pas y répondre directement.
+        </p>
     </div>
 </div>
 </body>
