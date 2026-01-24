@@ -44,14 +44,24 @@ public class EmailService {
                     helper.addInline("logoImage", logoResource);
                     helper.addAttachment("Logo.png", logoResource);
                 }
-
                 case "REGISTER_EMPLOYEE" -> {
                     htmlContent = loadTemplate("classpath:templates/register-employee-email.html")
                             .replace("{{employeeName}}", (String) notification.metadata().get("employeeName"))
                             .replace("{{societyName}}", (String) notification.metadata().get("societyName"))
-                            .replace("{{frontendLink}}", (String) notification.metadata().get("frontendLink"));
-                }
+                            .replace("{{societyCode}}", (String) notification.metadata().get("societyCode"))
+                            .replace("{{frontendLink}}", (String) notification.metadata().get("frontendLink"))
+                            .replace("{{email}}", (String) notification.metadata().get("email"));
 
+                    // Optionnel : ajouter le logo si disponible
+                    try {
+                        Resource logoResource = resourceLoader.getResource("classpath:attachments/logo.png");
+                        if (logoResource.exists()) {
+                            helper.addInline("logoImage", logoResource);
+                        }
+                    } catch (Exception e) {
+                        log.warn("Logo non trouvé pour REGISTER_EMPLOYEE");
+                    }
+                }
                 case "RESET_PASSWORD" -> {
                     htmlContent = loadTemplate("classpath:templates/reset-password-email.html")
                             .replace("{{frontendLink}}", (String) notification.metadata().get("frontendLink"))

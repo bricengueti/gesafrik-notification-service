@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenue chez {{societyName}}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7fa;
+            padding: 20px;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .email-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+        }
+
+        .email-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .email-header p {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+
+        .email-body {
+            padding: 40px 30px;
+        }
+
+        .greeting {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #4a5568;
+            margin-bottom: 30px;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 6px;
+        }
+
+        .info-box h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .info-value {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: transform 0.2s ease;
+            margin: 20px 0;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .instructions {
+            background: #fff8e1;
+            border: 1px solid #ffd54f;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+
+        .instructions h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #f57c00;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .instructions ol {
+            margin-left: 20px;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+        }
+
+        .email-footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .footer-text {
+            font-size: 13px;
+            color: #6c757d;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            margin-top: 20px;
+        }
+
+        .footer-links a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 13px;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #e9ecef, transparent);
+            margin: 30px 0;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .email-body {
+                padding: 30px 20px;
+            }
+
+            .email-header {
+                padding: 30px 20px;
+            }
+
+            .email-header h1 {
+                font-size: 24px;
+            }
+
+            .greeting {
+                font-size: 18px;
+            }
+
+            .message {
+                font-size: 15px;
+            }
+
+            .cta-button {
+                padding: 14px 30px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <!-- Header -->
+    <div class="email-header">
+        <!-- Logo optionnel -->
+        <!-- <img src="cid:logoImage" alt="Logo" class="logo"> -->
+        <h1>🎉 Bienvenue chez {{societyName}} !</h1>
+        <p>Votre compte employé a été créé avec succès</p>
+    </div>
+
+    <!-- Body -->
+    <div class="email-body">
+        <div class="greeting">
+            Bonjour {{employeeName}},
+        </div>
+
+        <div class="message">
+            Nous sommes ravis de vous accueillir au sein de <strong>{{societyName}}</strong> !
+            Votre compte employé vient d'être créé et vous pouvez maintenant finaliser votre inscription
+            pour accéder à la plateforme <strong>Gesafrik</strong>.
+        </div>
+
+        <!-- Informations de compte -->
+        <div class="info-box">
+            <h3>📋 Informations de votre compte</h3>
+            <div class="info-item">
+                <span class="info-label">Entreprise :</span>
+                <span class="info-value">{{societyName}}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Code société :</span>
+                <span class="info-value">{{societyCode}}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Email :</span>
+                <span class="info-value">{{email}}</span>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div style="text-align: center;">
+            <a href="{{frontendLink}}" class="cta-button">
+                ✅ Finaliser mon inscription
+            </a>
+        </div>
+
+        <!-- Instructions -->
+        <div class="instructions">
+            <h3>⚠️ Prochaines étapes</h3>
+            <ol>
+                <li>Cliquez sur le bouton ci-dessus pour accéder à la page de finalisation</li>
+                <li>Créez votre mot de passe sécurisé</li>
+                <li>Complétez votre profil si nécessaire</li>
+                <li>Connectez-vous et découvrez la plateforme Gesafrik</li>
+            </ol>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="message" style="font-size: 14px; color: #6c757d;">
+            <strong>Note importante :</strong> Ce lien d'activation est valable pendant 48 heures.
+            Si vous n'avez pas demandé cette inscription, veuillez ignorer cet email ou contacter
+            votre administrateur système.
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="email-footer">
+        <p class="footer-text">
+            Cet email a été envoyé automatiquement par <strong>Gesafrik</strong>.<br>
+            Pour toute question, contactez votre administrateur système.
+        </p>
+
+        <div class="footer-links">
+            <a href="#">Centre d'aide</a> |
+            <a href="#">Conditions d'utilisation</a> |
+            <a href="#">Politique de confidentialité</a>
+        </div>
+
+        <p class="footer-text" style="margin-top: 20px; font-size: 12px;">
+            © 2025 Gesafrik. Tous droits réservés.
+        </p>
+    </div>
+</div>
+</body>
+</html>
