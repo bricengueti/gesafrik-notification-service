@@ -39,18 +39,10 @@ public class EmailService {
                             .replace("{{frontendLink}}", (String) notification.metadata().get("frontendLink"))
                             .replace("{{userName}}", (String) notification.metadata().get("userName"));
 
-                    helper.setTo(notification.recipient());
-                    helper.setSubject(notification.subject());
-                    helper.setText(htmlContent, true);
-
-                    // 🔹 Ajouter une pièce jointe (PDF placé dans resources/attachments/)
+                    // Ajouter le logo en ligne et en pièce jointe
                     Resource logoResource = resourceLoader.getResource("classpath:attachments/logo.png");
                     helper.addInline("logoImage", logoResource);
                     helper.addAttachment("Logo.png", logoResource);
-
-                    mailSender.send(mimeMessage);
-                    log.info("Email REGISTER_SOCIETY avec pièce jointe envoyé à {}", notification.recipient());
-                    return; // on sort ici car déjà envoyé
                 }
 
                 case "REGISTER_EMPLOYEE" -> {
@@ -71,16 +63,17 @@ public class EmailService {
                 }
             }
 
-            // 🔹 Envoi pour les cas sans pièce jointe
+            // Envoi pour tous les cas (une seule fois)
             helper.setTo(notification.recipient());
             helper.setSubject(notification.subject());
             helper.setText(htmlContent, true);
 
             mailSender.send(mimeMessage);
-            log.info("HTML email envoyé avec succès à {}", notification.recipient());
+            log.info("HTML email envoyé avec succès à {} (type: {})", notification.recipient(), notification.content());
 
         } catch (Exception e) {
-            log.error("Échec d’envoi de l’email à {}: {}", notification.recipient(), e.getMessage(), e);
+            log.error("Échec d'envoi de l'email à {}: {}", notification.recipient(), e.getMessage(), e);
+            throw new RuntimeException("Erreur lors de l'envoi de l'email", e);
         }
     }
 
