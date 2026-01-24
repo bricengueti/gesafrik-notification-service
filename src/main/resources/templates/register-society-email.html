@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bienvenue sur Gesafrik</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          color: #333;
+          line-height: 1.6;
+          background-color: #f9f9f9;
+          padding: 20px;
+        }
+        .container {
+          max-width: 600px;
+          margin: auto;
+          background: #fff;
+          border-radius: 8px;
+          padding: 30px;
+          border: 1px solid #eee;
+        }
+        .header {
+          text-align: center;
+          color: #0066cc;
+        }
+        .button {
+          display: inline-block;
+          padding: 12px 20px;
+          margin-top: 20px;
+          background-color: #0066cc;
+          color: #fff;
+          text-decoration: none;
+          border-radius: 6px;
+          font-weight: bold;
+        }
+        .footer {
+          margin-top: 30px;
+          font-size: 12px;
+          color: #777;
+          text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 class="header">Bienvenue sur Gesafrik 🎉</h2>
+    <p>
+        Félicitations ! La société <strong>{{societyName}}</strong> a été enregistrée avec succès.<br>
+        Son code d’identification unique est : <strong>{{societyCode}}</strong>.
+    </p>
+    <p>
+        Un compte administrateur au nom de {{userName}} a été créé pour vous. Cliquez sur le bouton ci-dessous pour  accéder à votre première connexion.
+    </p>
+    <a href="{{frontendLink}}" class="button">
+        login
+    </a>
+    <div class="footer">
+        Merci d’avoir choisi Gesafrik, votre ERP d’excellence.
+    </div>
+</div>
+</body>
+</html>
