@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenue chez {{societyName}}</title>
+    <title>Bienvenue chez {{societyName}} - GESAFRIC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -12,67 +13,114 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7fa;
-            padding: 20px;
-            line-height: 1.6;
+            font-family: 'Ubuntu Sans', 'Urbanist', 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #0F766E 0%, #00cc99 100%);
+            padding: 40px 20px;
+            margin: 0;
+            min-height: 100vh;
         }
 
-        .email-container {
-            max-width: 600px;
+        .email-wrapper {
+            max-width: 650px;
             margin: 0 auto;
-            background: white;
-            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 60px rgba(15, 118, 110, 0.3);
         }
 
-        .email-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 50px 40px;
+        /* Header avec dégradé */
+        .header {
+            background: linear-gradient(135deg, #0F766E 0%, #00cc99 100%);
+            padding: 40px 30px;
             text-align: center;
-            color: white;
             position: relative;
         }
 
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
         .logo-container {
-            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+            margin-bottom: 20px;
         }
 
         .logo {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
             background: white;
-            padding: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
         }
 
-        .email-header h1 {
+        .logo-letter {
             font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+            letter-spacing: 1px;
         }
 
-        .email-header .subtitle {
-            font-size: 18px;
-            opacity: 0.95;
+        .logo-red {
+            color: #B81223;
+        }
+
+        .logo-teal {
+            color: #0F766E;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 15px 0 5px 0;
+            position: relative;
+            z-index: 2;
+            letter-spacing: 0.5px;
+        }
+
+        .header .subtitle {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 16px;
             font-weight: 400;
+            position: relative;
+            z-index: 2;
         }
 
-        .email-body {
-            padding: 45px 40px;
+        /* Contenu principal */
+        .content {
+            padding: 40px 30px;
+            background: #fdfdfd;
         }
 
-        .greeting {
+        .welcome-message {
+            background: linear-gradient(135deg, rgba(15, 118, 110, 0.08) 0%, rgba(0, 204, 153, 0.08) 100%);
+            border-left: 4px solid #0F766E;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .welcome-message h2 {
+            color: #0F766E;
             font-size: 24px;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 25px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .greeting .wave {
+        .welcome-message .wave {
             display: inline-block;
             animation: wave 0.5s ease-in-out;
         }
@@ -83,37 +131,38 @@
             75% { transform: rotate(-15deg); }
         }
 
-        .intro-text {
-            font-size: 17px;
-            color: #4a5568;
-            line-height: 1.8;
-            margin-bottom: 35px;
+        .welcome-message p {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.6;
         }
 
+        /* Carte d'information */
         .info-card {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: white;
             border-radius: 12px;
-            padding: 30px;
-            margin: 30px 0;
-            border-left: 5px solid #667eea;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 25px;
+            margin: 25px 0;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 2px 8px rgba(15, 118, 110, 0.08);
         }
 
         .info-card h3 {
+            color: #343a40;
             font-size: 18px;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            font-weight: 600;
         }
 
         .info-row {
             display: flex;
             justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
         }
 
         .info-row:last-child {
@@ -121,240 +170,223 @@
         }
 
         .info-label {
+            color: #6c757d;
+            font-size: 14px;
             font-weight: 600;
-            color: #4a5568;
-            font-size: 15px;
         }
 
         .info-value {
-            color: #667eea;
-            font-weight: 700;
-            font-size: 15px;
-            text-align: right;
+            color: #0F766E;
+            font-size: 16px;
+            font-weight: bold;
         }
 
-        .cta-container {
-            text-align: center;
-            margin: 40px 0;
+        /* Instructions */
+        .instructions {
+            margin: 30px 0;
         }
 
-        .cta-button {
-            display: inline-block;
-            padding: 18px 50px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
+        .instructions h3 {
+            color: #343a40;
             font-size: 18px;
-            font-weight: 700;
-            text-align: center;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s ease;
-            letter-spacing: 0.5px;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
-        }
-
-        .steps-section {
-            background: #fff8e1;
-            border-radius: 12px;
-            padding: 30px;
-            margin: 35px 0;
-            border: 2px dashed #ffd54f;
-        }
-
-        .steps-section h3 {
-            font-size: 18px;
-            font-weight: 700;
-            color: #f57c00;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            font-weight: 600;
         }
 
-        .step {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 18px;
-            padding-left: 10px;
+        .step-list {
+            list-style: none;
+            counter-reset: step-counter;
         }
 
-        .step:last-child {
-            margin-bottom: 0;
+        .step-list li {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 45px;
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.6;
         }
 
-        .step-number {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: linear-gradient(135deg, #0F766E 0%, #00cc99 100%);
             color: white;
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
+            font-weight: bold;
             font-size: 14px;
-            margin-right: 15px;
-            flex-shrink: 0;
-            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
         }
 
-        .step-content {
-            flex: 1;
-            padding-top: 4px;
-        }
-
-        .step-title {
-            font-weight: 700;
-            color: #2c3e50;
-            font-size: 15px;
-            margin-bottom: 4px;
-        }
-
-        .step-description {
-            color: #4a5568;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .divider {
-            height: 2px;
-            background: linear-gradient(to right, transparent, #e9ecef, transparent);
+        /* Bouton CTA */
+        .cta-container {
+            text-align: center;
             margin: 35px 0;
         }
 
-        .warning-box {
-            background: #fff3cd;
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #0F766E 0%, #00cc99 100%);
+            color: white;
+            text-decoration: none;
+            padding: 16px 50px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(15, 118, 110, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(15, 118, 110, 0.4);
+        }
+
+        /* Note de sécurité */
+        .security-note {
+            background: #fff9e6;
             border-left: 4px solid #ffc107;
-            padding: 20px;
+            padding: 15px;
             border-radius: 8px;
             margin: 25px 0;
         }
 
-        .warning-box p {
-            margin: 0;
+        .security-note strong {
+            color: #856404;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 15px;
+        }
+
+        .security-note p {
             color: #856404;
             font-size: 14px;
-            line-height: 1.7;
+            margin: 0;
+            line-height: 1.5;
         }
 
-        .warning-box strong {
-            color: #664d03;
-        }
-
-        .email-footer {
-            background: linear-gradient(180deg, #2c3e50 0%, #1a252f 100%);
-            padding: 40px;
+        /* Support info */
+        .support-box {
+            background: linear-gradient(135deg, rgba(15, 118, 110, 0.05) 0%, rgba(0, 204, 153, 0.05) 100%);
+            border: 1px solid rgba(15, 118, 110, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
             text-align: center;
-            color: white;
         }
 
-        .footer-logo {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 20px;
-        }
-
-        .footer-text {
+        .support-box p {
+            color: #555;
             font-size: 14px;
-            opacity: 0.9;
-            line-height: 1.8;
-            margin-bottom: 20px;
+            margin: 0;
+        }
+
+        .support-box a {
+            color: #0F766E;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .support-box a:hover {
+            color: #00cc99;
+        }
+
+        /* Footer */
+        .footer {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .footer-title {
+            color: #0F766E;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .footer-description {
+            color: #6c757d;
+            font-size: 14px;
+            line-height: 1.6;
+            max-width: 500px;
+            margin: 0 auto 20px;
         }
 
         .footer-links {
-            margin: 25px 0;
-            padding: 20px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-links a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 13px;
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            opacity: 1;
-            text-decoration: underline;
-        }
-
-        .copyright {
-            font-size: 12px;
-            opacity: 0.7;
-            margin-top: 20px;
-        }
-
-        .social-icons {
             margin: 20px 0;
         }
 
-        .social-icons a {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            margin: 0 8px;
-            line-height: 40px;
+        .footer-links a {
+            color: #0F766E;
             text-decoration: none;
-            color: white;
-            transition: all 0.3s ease;
+            margin: 0 15px;
+            font-size: 13px;
+            font-weight: 600;
         }
 
-        .social-icons a:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
+        .footer-links a:hover {
+            color: #00cc99;
+            text-decoration: underline;
         }
 
+        .footer-copyright {
+            color: #999;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+
+        /* Responsive */
         @media only screen and (max-width: 600px) {
             body {
-                padding: 10px;
+                padding: 20px 10px;
             }
 
-            .email-header {
-                padding: 35px 25px;
+            .header {
+                padding: 30px 20px;
             }
 
-            .email-header h1 {
-                font-size: 26px;
+            .logo-letter {
+                font-size: 24px;
             }
 
-            .email-body {
-                padding: 30px 25px;
+            .header h1 {
+                font-size: 22px;
             }
 
-            .greeting {
-                font-size: 20px;
+            .content {
+                padding: 30px 20px;
             }
 
-            .intro-text {
+            .info-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .info-value {
                 font-size: 15px;
             }
 
-            .info-card {
-                padding: 20px;
-            }
-
             .cta-button {
-                padding: 15px 35px;
+                padding: 14px 40px;
                 font-size: 16px;
+                display: block;
+                width: 100%;
             }
 
-            .steps-section {
-                padding: 20px;
-            }
-
-            .email-footer {
-                padding: 30px 20px;
+            .footer {
+                padding: 20px 15px;
             }
 
             .footer-links a {
@@ -365,31 +397,42 @@
     </style>
 </head>
 <body>
-<div class="email-container">
+<div class="email-wrapper">
     <!-- Header -->
-    <div class="email-header">
+    <div class="header">
         <div class="logo-container">
-            <img src="cid:logoImage" alt="{{societyName}} Logo" class="logo">
+            <div class="logo">
+                <span class="logo-letter logo-red">G</span>
+                <span class="logo-letter logo-red">E</span>
+                <span class="logo-letter logo-red">S</span>
+                <span class="logo-letter logo-teal">A</span>
+                <span class="logo-letter logo-teal">F</span>
+                <span class="logo-letter logo-teal">R</span>
+                <span class="logo-letter logo-teal">I</span>
+                <span class="logo-letter logo-teal">C</span>
+            </div>
         </div>
         <h1>🎉 Bienvenue chez {{societyName}} !</h1>
         <p class="subtitle">Votre compte employé a été créé avec succès</p>
     </div>
 
-    <!-- Body -->
-    <div class="email-body">
-        <div class="greeting">
-            <span class="wave">👋</span> Bonjour {{employeeName}},
+    <!-- Contenu principal -->
+    <div class="content">
+        <!-- Message de bienvenue -->
+        <div class="welcome-message">
+            <h2>
+                <span class="wave">👋</span> Bonjour {{employeeName}},
+            </h2>
+            <p>
+                Nous sommes ravis de vous accueillir au sein de <strong>{{societyName}}</strong> !
+                Votre compte employé vient d'être créé et il ne vous reste plus qu'une étape pour
+                accéder à la plateforme <strong>GESAFRIC</strong> et commencer à profiter de tous ses avantages.
+            </p>
         </div>
 
-        <p class="intro-text">
-            Nous sommes ravis de vous accueillir au sein de <strong>{{societyName}}</strong> !
-            Votre compte employé vient d'être créé et il ne vous reste plus qu'une étape pour
-            accéder à la plateforme <strong>Gesafrik</strong> et commencer à profiter de tous ses avantages.
-        </p>
-
-        <!-- Informations du compte -->
+        <!-- Carte d'informations -->
         <div class="info-card">
-            <h3>📋 Informations de votre compte</h3>
+            <h3><i class="fas fa-id-card"></i> Informations de votre compte</h3>
             <div class="info-row">
                 <span class="info-label">Entreprise</span>
                 <span class="info-value">{{societyName}}</span>
@@ -404,100 +447,63 @@
             </div>
         </div>
 
-        <!-- Call to Action -->
+        <!-- Instructions -->
+        <div class="instructions">
+            <h3><i class="fas fa-clipboard-list"></i> Comment finaliser votre inscription ?</h3>
+            <ul class="step-list">
+                <li>Cliquez sur le bouton ci-dessous pour accéder à la page de finalisation</li>
+                <li>Créez votre mot de passe sécurisé pour protéger votre compte</li>
+                <li>Complétez votre profil avec vos informations personnelles et professionnelles</li>
+                <li>Connectez-vous et découvrez toutes les fonctionnalités de GESAFRIC</li>
+            </ul>
+        </div>
+
+        <!-- Bouton CTA -->
         <div class="cta-container">
             <a href="{{frontendLink}}" class="cta-button">
-                ✅ Finaliser mon inscription
+                <i class="fas fa-check-circle"></i> Finaliser mon inscription
             </a>
         </div>
 
-        <!-- Étapes -->
-        <div class="steps-section">
-            <h3>🚀 Comment finaliser votre inscription ?</h3>
-
-            <div class="step">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <div class="step-title">Cliquez sur le bouton</div>
-                    <div class="step-description">
-                        Accédez à la page de finalisation en cliquant sur le bouton ci-dessus
-                    </div>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <div class="step-title">Créez votre mot de passe</div>
-                    <div class="step-description">
-                        Choisissez un mot de passe sécurisé pour protéger votre compte
-                    </div>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-number">3</div>
-                <div class="step-content">
-                    <div class="step-title">Complétez votre profil</div>
-                    <div class="step-description">
-                        Ajoutez vos informations personnelles et professionnelles
-                    </div>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-number">4</div>
-                <div class="step-content">
-                    <div class="step-title">Connectez-vous</div>
-                    <div class="step-description">
-                        Accédez à la plateforme et découvrez toutes ses fonctionnalités
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <!-- Avertissement -->
-        <div class="warning-box">
+        <!-- Note de sécurité -->
+        <div class="security-note">
+            <strong><i class="fas fa-shield-alt"></i> Important - Sécurité</strong>
             <p>
-                <strong>⚠️ Important :</strong> Ce lien d'activation est valable pendant <strong>48 heures</strong>.
+                Ce lien d'activation est valable pendant <strong>48 heures</strong>.
                 Après ce délai, vous devrez contacter votre administrateur pour obtenir un nouveau lien.
                 Si vous n'avez pas demandé cette inscription, veuillez ignorer cet email ou contacter
                 immédiatement votre responsable.
             </p>
         </div>
 
-        <p class="intro-text" style="margin-top: 30px; text-align: center; font-size: 15px;">
-            Besoin d'aide ? Notre équipe support est là pour vous accompagner ! 💬
-        </p>
+        <!-- Support -->
+        <div class="support-box">
+            <p>
+                <i class="fas fa-headset"></i> Besoin d'aide ? Notre équipe support est là pour vous accompagner !<br>
+                Contactez-nous à <a href="mailto:support@gesafric.com"><i class="fas fa-envelope"></i> support@gesafric.com</a>
+            </p>
+        </div>
     </div>
 
     <!-- Footer -->
-    <div class="email-footer">
-        <img src="cid:logoImage" alt="Gesafrik Logo" class="footer-logo">
-
-        <p class="footer-text">
-            Cet email a été envoyé automatiquement par <strong>Gesafrik</strong>.<br>
-            Pour toute question, contactez votre administrateur système ou notre support.
+    <div class="footer">
+        <div class="footer-title">GESAFRIC</div>
+        <p class="footer-description">
+            Votre ERP de comptabilité moderne et intuitif.
+            Centralisez, automatisez et suivez en temps réel l'ensemble de vos opérations comptables
+            en toute simplicité.
         </p>
-
-        <div class="social-icons">
-            <a href="#" title="Facebook">f</a>
-            <a href="#" title="Twitter">t</a>
-            <a href="#" title="LinkedIn">in</a>
-        </div>
 
         <div class="footer-links">
             <a href="#">Centre d'aide</a>
+            <a href="#">Documentation</a>
+            <a href="#">Nous contacter</a>
             <a href="#">Conditions d'utilisation</a>
-            <a href="#">Politique de confidentialité</a>
-            <a href="#">Contact</a>
         </div>
 
-        <p class="copyright">
-            © 2025 Gesafrik. Tous droits réservés.<br>
-            Plateforme de gestion d'entreprise moderne et intuitive.
+        <p class="footer-copyright">
+            © 2025 GESAFRIC - Tous droits réservés<br>
+            Cet email a été envoyé automatiquement, merci de ne pas y répondre directement.
         </p>
     </div>
 </div>
